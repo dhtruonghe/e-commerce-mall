@@ -21,8 +21,8 @@
                     <td><input type="text" name="CustomerID" id="CustomerID"></td>
                 </tr>
                 <tr>
-                    <td><label for="CompanyName">CompanyName</label></td>
-                    <td><input type="text" name="CompanyName" id="CompanyName" required></td>
+                    <td><label for="Password">Password</label></td>
+                    <td><input type="text" name="Password" id="Password" required></td>
                 </tr>
 <!--                <tr>
                     <td><label for="ContactName">ContactName</label></td>
