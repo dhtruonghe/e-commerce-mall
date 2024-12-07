@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
-import model.DAOBill;
 import model.DAOCart;
 import model.DAOOrder;
 import model.DAOOrderDetails;
@@ -32,6 +31,7 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DAOCart dao = new DAOCart();
+        DAOOrder daoOrder = new DAOOrder();
         HttpSession session = request.getSession(true);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -51,7 +51,7 @@ public class CartController extends HttpServlet {
                 response.sendRedirect("ProductURL");
             }
             if (service.equals("showCart")) {
-                Vector<Cart> vector = new Vector<Cart>();
+                Vector<Cart> vector = new Vector<>();
                 //lay cot key
                 Enumeration<String> enu = session.getAttributeNames();
                 while (enu.hasMoreElements()) {
@@ -80,7 +80,7 @@ public class CartController extends HttpServlet {
             }
 
             if (service.equals("cart")) {
-//                Vector<Cart> vector = new Vector<Cart>();
+//                Vector<Cart> vector = new Vector<>();
 ////                lay cot key
 //                Enumeration<String> enu = session.getAttributeNames();
 //                while (enu.hasMoreElements()) {
@@ -110,7 +110,7 @@ public class CartController extends HttpServlet {
                 }
                 session.setAttribute("vectorCart", cartList);
                 int cid = Integer.parseInt(request.getParameter("cid"));
-                response.sendRedirect("IndexURL?service=getProduct&cid=" + cid);
+                response.sendRedirect("ProductURL?service=searchCateID&cid=" + cid);
             }
             if (service.equals("removeAll")) {
                 session.invalidate(); // clear entire cart
@@ -144,7 +144,7 @@ public class CartController extends HttpServlet {
                 OrderDetails od;
 
                 Customers cus = (Customers) session.getAttribute("customer");
-                Orders o = new Orders(0, cus.getCustomerID(), 1,
+                Orders o = new Orders(cus.getCustomerID(), 1,
                         request.getParameter("orderDate"),
                         request.getParameter("requiredDate"),
                         request.getParameter("shippedDate"),
@@ -152,8 +152,9 @@ public class CartController extends HttpServlet {
                         cus.getAddress(),
                         cus.getCity(), cus.getRegion(),
                         cus.getPostalCode(), cus.getCountry());
+                int orderID = daoOrder.addOrder(o);
                 for (Cart cart : cartList) {
-                    od = new OrderDetails(o.getOrderID(), cart.getProductID(),
+                    od = new OrderDetails(orderID, cart.getProductID(),
                             cart.getUnitPrice(), cart.getQuantity(),
                             cart.getDiscount());
 
@@ -173,6 +174,7 @@ public class CartController extends HttpServlet {
                     request.getRequestDispatcher("JSP/checkOut.jsp").forward(request, response);
                 }
             }
+            
         }
     }
 

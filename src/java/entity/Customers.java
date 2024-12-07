@@ -11,14 +11,14 @@ package entity;
 public class Customers {
 
     private String CustomerID, CompanyName, ContactName, ContactTitle, Address,
-            City, Region, PostalCode, Country, Phone, Fax;
+            City, Region, PostalCode, Country, Phone, Fax, Password;
 
     public Customers() {
     }
 
     public Customers(String CustomerID, String CompanyName, String ContactName,
             String ContactTitle, String Address, String City, String Region,
-            String PostalCode, String Country, String Phone, String Fax) {
+            String PostalCode, String Country, String Phone, String Fax, String Password) {
         this.CustomerID = CustomerID;
         this.CompanyName = CompanyName;
         this.ContactName = ContactName;
@@ -30,6 +30,7 @@ public class Customers {
         this.Country = Country;
         this.Phone = Phone;
         this.Fax = Fax;
+        this.Password = Password;
     }
 
     public Customers(String CustomerID, String CompanyName) {
@@ -124,6 +125,14 @@ public class Customers {
 
     public void setFax(String Fax) {
         this.Fax = Fax;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
     }
     
     @Override

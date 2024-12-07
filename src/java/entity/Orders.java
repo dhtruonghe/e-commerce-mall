@@ -38,6 +38,22 @@ public class Orders {
         this.shipCountry = shipCountry;
     }
 
+    public Orders(String customerID, int employeeID, String orderDate, String requiredDate, String shippedDate, int shipVia, double freight, String shipName, String shipAddres, String shipCity, String shipRegion, String shipPostalCode, String shipCountry) {
+        this.customerID = customerID;
+        this.employeeID = employeeID;
+        this.orderDate = orderDate;
+        this.requiredDate = requiredDate;
+        this.shippedDate = shippedDate;
+        this.shipVia = shipVia;
+        this.freight = freight;
+        this.shipName = shipName;
+        this.shipAddres = shipAddres;
+        this.shipCity = shipCity;
+        this.shipRegion = shipRegion;
+        this.shipPostalCode = shipPostalCode;
+        this.shipCountry = shipCountry;
+    }
+
     
 
     public int getOrderID() {

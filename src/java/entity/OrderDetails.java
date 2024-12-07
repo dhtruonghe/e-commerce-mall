@@ -25,7 +25,7 @@ public class OrderDetails {
         this.quantity = quantity;
         this.discount = discount;
     }
-
+    
     public int getOrderID() {
         return orderID;
     }

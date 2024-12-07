@@ -20,7 +20,7 @@ public class DAOCustomers extends DBConnect{
     
     public Customers login(String userName, String password){
         Customers customer = null;
-        String sql = "select * from Customers where CustomerID =? and CompanyName=?";
+        String sql = "select * from Customers where CustomerID =? and Password=?";
         
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -32,7 +32,7 @@ public class DAOCustomers extends DBConnect{
                         ,rs.getString(3), rs.getString(4), 
                         rs.getString(5), rs.getString(6), rs.getString(7),
                         rs.getString(8), rs.getString(9), rs.getString(10), 
-                        rs.getString(11));
+                        rs.getString(11), rs.getString(12));
             }
             
         } catch (SQLException ex) {
@@ -184,7 +184,8 @@ public class DAOCustomers extends DBConnect{
                         PostalCode = rs.getString(8),
                         Country = rs.getString(9),
                         Phone = rs.getString(10),
-                        Fax = rs.getString(11);
+                        Fax = rs.getString(11),
+                        Password = rs.getString(12);;
                 Customers cus = new Customers(CustomerID, CompanyName,
                         ContactName,
                         ContactTitle,
@@ -194,7 +195,8 @@ public class DAOCustomers extends DBConnect{
                         PostalCode,
                         Country,
                         Phone,
-                        Fax);
+                        Fax,
+                        Password);
                 System.out.println(cus.toString());
             }
         } catch (SQLException ex) {
@@ -220,7 +222,8 @@ public class DAOCustomers extends DBConnect{
                         PostalCode = rs.getString(8),
                         Country = rs.getString(9),
                         Phone = rs.getString(10),
-                        Fax = rs.getString(11);
+                        Fax = rs.getString(11),
+                        Password = rs.getString(12);
                 Customers cus = new Customers(CustomerID, CompanyName,
                         ContactName,
                         ContactTitle,
@@ -230,7 +233,9 @@ public class DAOCustomers extends DBConnect{
                         PostalCode,
                         Country,
                         Phone,
-                        Fax);
+                        Fax, 
+                        Password);
+                
                 vector.add(cus);
             }    
         } catch (SQLException ex) {

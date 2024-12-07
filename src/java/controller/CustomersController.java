@@ -129,6 +129,7 @@ public class CustomersController extends HttpServlet {
                     String country = request.getParameter("Country");
                     String phone = request.getParameter("Phone");
                     String fax = request.getParameter("Fax");
+                    String pass = request.getParameter("Password");
                     //check data - validate
                     if (companyName.equals("")) {
                         out.print("CompanyName empty");
@@ -136,7 +137,7 @@ public class CustomersController extends HttpServlet {
 
                     Customers customer = new Customers(customerID, companyName, contactName,
                             contactTitle, address, city, region, postalCode, country,
-                            phone, fax);
+                            phone, fax, pass);
 
                     int n = dao.updateCustomer(customer);
                     response.sendRedirect("CustomersURL");
@@ -161,6 +162,7 @@ public class CustomersController extends HttpServlet {
                     String country = request.getParameter("Country");
                     String phone = request.getParameter("Phone");
                     String fax = request.getParameter("Fax");
+                    String pass = request.getParameter("Password");
                     //check data - validate
                     if (companyName.equals("")) {
                         out.print("CompanyName empty");
@@ -168,7 +170,7 @@ public class CustomersController extends HttpServlet {
 
                     Customers customer = new Customers(CustomerID, companyName, contactName,
                             contactTitle, address, city, region, postalCode, country,
-                            phone, fax);
+                            phone, fax, pass);
 
                     int n = dao.addCustomers(customer);
                     response.sendRedirect("CustomersURL");

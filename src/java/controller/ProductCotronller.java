@@ -4,6 +4,7 @@
  */
 package controller;
 
+import entity.Categories;
 import entity.Product;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -13,10 +14,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.util.Vector;
+import model.DAOCategories;
 import model.DAOProduct;
-
 
 /**
  *
@@ -38,9 +40,12 @@ public class ProductCotronller extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DAOProduct dao = new DAOProduct();
+        DAOCategories daoCate = new DAOCategories();
         try (PrintWriter out = response.getWriter()) {
             //display all products
             // service ?
+            Vector<Categories> vectorCate = (Vector<Categories>) daoCate.getCategorieses("select * from Categories");
+            request.setAttribute("vectorCate", vectorCate);
             String service = request.getParameter("service");
             if (service == null) {
                 service = "listAll";
@@ -93,7 +98,7 @@ public class ProductCotronller extends HttpServlet {
                 }
 
             }
-            if(service.equals("searchCateID")){
+            if (service.equals("searchCateID")) {
                 String cid = request.getParameter("cid");
                 String sql = "select * from Products where CategoryID = " + cid;
                 Vector<Product> vector = dao.getProducts(sql);
@@ -104,7 +109,7 @@ public class ProductCotronller extends HttpServlet {
                 //run
                 dispath.forward(request, response);
             }
-            if(service.equals("searchSupplierID")){
+            if (service.equals("searchSupplierID")) {
                 String sid = request.getParameter("sid");
                 String sql = "select * from Products where SupplierID = " + sid;
                 Vector<Product> vector = dao.getProducts(sql);
@@ -184,7 +189,7 @@ public class ProductCotronller extends HttpServlet {
                 }
 
             }
-               if (service.equals("listAll")) {//request, service
+            if (service.equals("listAll")) {//request, service
                 //call model
                 String sql = "select * from Products";
                 Vector<Product> vector = dao.getProducts(sql);
